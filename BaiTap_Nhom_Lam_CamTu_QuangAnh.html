@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập nhóm</title>
+</head>
+
+<body>
+    <form>
+        <fieldset>
+            <legend>Bài 1: Mượn tiền xã hội đen</legend>
+            <table>
+                <tr>
+                    <td>Số tiền mượn ban đầu:</td>
+                    <td><input type="number" placeholder="0 VND" id="B1_Muon"></td>
+                </tr>
+                <tr>
+                    <td>Lãi suất:</td>
+                    <td><input type="number" placeholder="0 %" id="B1_LaiSuat"></td>
+                </tr>
+                <tr>
+                    <td>Thời gian:</td>
+                    <td><input type="number" placeholder="0 ngày" id="B1_ThoiGian"></td>
+                </tr>
+                <tr>
+                    <td>Số tiền phải trả :</td>
+                    <td><input type="number" placeholder="0 VND" id="B1_Tra"></td>
+                </tr>
+            </table>
+            <button type="button" onclick="B1_TinhTienTra()">Tính</button>
+        </fieldset>
+        <fieldset>
+            <legend>Bài 2: Tính tổng</legend>
+            <p>Tính tổng các số chia hết cho <input placeholder="3 5 7" id="B2_sbc"> </p>
+            <p>Tính từ <input type="number" id="B2_from"> tới <input type="number" id="B2_to"></p>
+            <button type="button" onclick="B2_TinhTong()">Bằng</button> <input id="B2_ketqua">
+
+        </fieldset>
+        <fieldset>
+            <legend>Bài 3: Fibonacci</legend>
+            <p>
+                <button type="button" onclick="B3_Fibonacci()">Hiển thị</button>
+                <span> </span>
+                <input placeholder="1" id="B3_number">
+                <span> số fibonacci đầu tiên:</span>
+            </p>
+            <p id="B3_ketqua" style="width: 500px"> </p>
+        </fieldset>
+        <fieldset>
+            <legend>NV2: Kiểm tra số thuộc dãy fibonacci hay không:</legend>
+            <p> Kiểm tra số <input type="number" id="NV2_number"> có thuộc dãy fibonacci hay không:</p>
+            <button type="button" onclick="NV2_Fibonacci()">Kết quả</button>
+            <p id="NV2_ketqua"></p>
+        </fieldset>
+
+        <fieldset>
+            <legend>NV 3:</legend>
+            <p>Hiển thị <input placeholder="1" id="NV3_number"> số nguyên tố đầu tiên:</p>
+            <button type="button" onclick="NV3_SNT()">Kết quả</button>
+            <p id="NV3_ketqua"></p>
+        </fieldset>
+
+    </form>
+
+
+
+    <script>
+        function B1_TinhTienTra() {
+            let tienMuon = document.getElementById("B1_Muon").value;
+            let laiSuat = document.getElementById("B1_LaiSuat").value;
+            let thoiGian = document.getElementById("B1_ThoiGian").value;
+            let tienPhaiTra = tienMuon * ((1 + laiSuat / 100) ** thoiGian);
+            document.getElementById("B1_Tra").value = tienPhaiTra;
+        }
+
+        function B2_TinhTong() {
+            let arrSBC = [];
+            const arrStr = document.getElementById("B2_sbc").value.split(" ");
+            for (let i = 0; i < arrStr.length; i++) {
+                let value = parseInt(arrStr[i]);
+                if (value != 0) {
+                    arrSBC.push(value);
+                }
+            }
+            let from = parseInt(document.getElementById("B2_from").value);
+            let to = parseInt(document.getElementById("B2_to").value);
+            let Tong = 0;
+            for (let i = from; i <= to; i++) {
+                for (let j = 0; j < arrSBC.length; j++) {
+                    if (i % arrSBC[j] == 0) {
+                        Tong += i;
+                        break;
+                    }
+                }
+            }
+            document.getElementById("B2_ketqua").value = Tong;
+        }
+
+        function B3_Fibonacci() {
+            let num = parseInt(document.getElementById("B3_number").value);
+            let ketqua = "";
+            if (num == 1) {
+                ketqua = "0"
+            } else if (num == 2) {
+                ketqua = "0, 1"
+            } else if (num > 2) {
+                let previous2 = 0;
+                let previous1 = 1;
+                let current = 0;
+                ketqua = "0, 1";
+                for (let i = 2; i < num; i++) {
+                    current = previous2 + previous1;
+                    previous2 = previous1;
+                    previous1 = current;
+                    ketqua += ", " + current;
+                }
+            } else {
+                ketqua = "Input không hợp lệ"
+            }
+            document.getElementById("B3_ketqua").textContent = ketqua;
+        }
+
+        function NV2_Fibonacci() {
+            let num = parseInt(document.getElementById("NV2_number").value);
+            let result = false;
+            if (num == 0 || num == 1) {
+                result = true;
+            } else if (num > 1) {
+                let previous2 = 0;
+                let previous1 = 1;
+                let current = 1;
+                while (current < num) {
+                    current = previous2 + previous1;
+                    previous2 = previous1;
+                    previous1 = current;
+                }
+                if (num == current) {
+                    result = true;
+                }
+            }
+            if (result) {
+                document.getElementById("NV2_ketqua").textContent = num + " thuộc dãy fibonacci.";
+            } else {
+                document.getElementById("NV2_ketqua").textContent = num + " không thuộc dãy fibonacci.";
+            }
+        }
+
+        function NV3_SNT() {
+            //Ý tưởng: Một số được xem là số nguyên tố nếu nó không chia hết cho bất kỳ số nguyên tố nào nhỏ hơn nó.
+            let num = parseInt(document.getElementById("NV3_number").value);
+            let listResult = [];
+            if (num < 1) {
+                document.getElementById("NV3_ketqua").textContent = "Input không hợp lệ."
+                return;
+            }
+            listResult.push(2);
+            let currentValue = listResult[listResult.length - 1] + 1;
+            while (listResult.length < num) {
+                let laSoNguyenTo = true;
+                for (let i = 0; i < listResult.length; i++) {
+                    if (currentValue % listResult[i] == 0) {
+                        laSoNguyenTo = false;
+                        break;
+                    }
+                }
+                if (laSoNguyenTo) { //current value KHÔNG chia hết cho bất kỳ một số nguyên tố nhỏ hơn nằm trong dãy listResult đã lưu trước đó.
+                    listResult.push(currentValue);
+                }
+                currentValue += 2;
+            }
+            let strReult = "2";
+            for (let i = 1; i < listResult.length; i++) {
+                strReult += ", " + listResult[i];
+            }
+            document.getElementById("NV3_ketqua").textContent = strReult;
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function checkFibonacci() {
+            let number = +prompt("Số cần kiểm tra");
+            let a = 0;
+            let b = 1;
+            let c = a + b;
+            while (c <= number) {
+                a = b;
+                b = c;
+                c = a + b;
+            }
+
+            if (a == number || number == b || number == c) {
+                alert(number + ' là số fibonacci');
+            } else {
+                alert(number + ' không phải là số fibonacci');
+            }
+        }
+
+        // function listPrime() { //Prime: Nguyên tố
+        //     let count = 0
+        //     let n = 100;
+        //     while (count < 10) {
+        //         let number = n;
+        //         let check = true;
+        //         if (number < 2) {
+        //             check = false;
+        //         }
+        //         for (let i = 2; i < number; i++) {
+        //             if (number % i == 0) {
+        //                 check = false;
+        //             }
+        //         }
+
+        //         if (check == true) {
+        //             document.write(number + ',');
+        //             count++;
+        //         }
+        //         n++;
+        //     }
+
+        // }
+
+        function listPrime() { //Prime: Nguyên tố
+            let count = 0
+            let n = 100;
+            let sum = 0;
+            while (count < 10) {
+                if (checkPrime(n) == "1") {
+                    document.write(n + ',');
+                    sum += n;
+                    count++;
+                }
+                n++;
+            }
+            document.write("<br> Tổng: " + sum);
+
+        }
+
+        function checkPrime(number) {
+            let check = true;
+            if (number < 2) {
+                check = false;
+            }
+            for (let i = 2; i < number; i++) {
+                if (number % i == 0) {
+                    check = false;
+                }
+            }
+
+            if (check == true) {
+                return "1";
+            }
+
+            return "0";
+        }
+
+        listPrime();
+    </script>
+</body>
+
+</html>

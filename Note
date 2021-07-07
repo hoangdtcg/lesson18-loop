@@ -1,0 +1,6 @@
+1. Kiểm tra 1 số có phải là số Fibonacci hay không
+2. Số nguyên tố n:
+    - Chỉ chia hết cho 1 và chính nó <-> không chia hết
+    cho 2 -> n-1
+    - return
+        - return "giá trị": trả về 1 giá trị khi gọi hàm
