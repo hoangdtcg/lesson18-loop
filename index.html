@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="discription" content="This is a calculator! It is a very basic calculator">
+    <title>My calculator</title>
+</head>
+<body>
+    
+    <style>
+        td
+        {
+            width: 80px;
+            height: 40px;
+        }
+        button
+        {
+            width: 100%;
+            height: 100%;
+        }
+        .white
+        {
+            background-color: white;
+            border-radius: 15%;
+        }
+        .gray
+        {
+            background-color: rgb(189, 184, 184);
+            border-radius: 15%;
+        }
+        .blue
+        {
+            background-color: rgb(168, 220, 255);
+            border-radius: 15%;
+        }
+    </style>
+    <table border="2px" align="center">
+        <tr>
+            <td style="border-bottom: 0px;" id="pts" colspan="4"></td>
+        </tr>
+        <tr>
+            <td style="border-top: 0px" id="result" colspan="4"></td>
+        </tr>
+        <tr>
+            <td><button class="white" onclick="num('(')">(</button></td>
+            <td><button class="white" onclick="num(')')">)</button></td>
+            <td><button class="blue" onclick="del()">Del</button></td>
+            <td><button class="blue" onclick="ac()">AC</button></td>
+        </tr>
+        <tr>
+            <td><button class="gray" onclick="num(1)">1</button></td>
+            <td><button class="gray" onclick="num(2)">2</button></td>
+            <td><button class="gray" onclick="num(3)">3</button></td>
+            <td><button class="blue" onclick="num('+')">+</button></td>
+        </tr>
+        <tr>
+            <td><button class="gray" onclick="num(4)">4</button></td>
+            <td><button class="gray" onclick="num(5)">5</button></td>
+            <td><button class="gray" onclick="num(6)">6</button></td>
+            <td><button class="blue" onclick="num('-')">-</button></td>
+        </tr>
+        <tr>
+            <td><button class="gray" onclick="num(7)">7</button></td>
+            <td><button class="gray" onclick="num(8)">8</button></td>
+            <td><button class="gray" onclick="num(9)">9</button></td>
+            <td><button class="blue" onclick="num('x')">x</button></td>
+        </tr>
+        <tr>
+            <td><button class="gray" onclick="num(0)">0</button></td>
+            <td><button class="gray" onclick="num('.')">.</button></td>
+            <td><button class="gray" onclick="num('%')">%</button></td>
+            <td><button class="blue" onclick="num('÷')">÷</button></td>
+        </tr>
+        <tr>
+            <td colspan="4"><button onclick="cal()">=</button></td>
+        </tr>
+    </table>
+    <script>
+        function num(val)
+        {
+            document.getElementById("pts").innerText += val;
+        }
+
+        function cal()
+        {
+            let express = document.getElementById("pts").innerText
+            let exp2 = express.replaceAll("÷","/")
+            let exp3 = exp2.replaceAll("x", "*")
+            let res = eval(exp3)
+            document.getElementById("result").innerText = res
+        }
+        
+        function del()
+        {
+            let express = document.getElementById("pts").innerText;
+            let res = express.substring(0,express.length - 1);
+            document.getElementById("pts").innerText = res
+        }
+        
+        function ac()
+        {
+            document.getElementById("pts").innerText = ""
+            document.getElementById("result").innerText = ""
+        }
+    </script>
+</body>
+</html>
