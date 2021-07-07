@@ -4,3 +4,19 @@
     cho 2 -> n-1
     - return
         - return "giá trị": trả về 1 giá trị khi gọi hàm
+        - kết thúc hàm
+break;
+    Thoát ra khỏi vòng lặp gần nhất (đang chạy)
+
+    for(let i = 0; i < 3 ;i++){
+        for(let j = 0; < 10;j++){
+            if(j > 5){
+                break;
+            }
+            document.write(j)
+        }
+    }
+
+continue;
+    - Bỏ qua những câu lệnh đằng sau
+    - Và đi đến vòng lặp tiếp theo
